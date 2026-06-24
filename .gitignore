@@ -1,0 +1,5 @@
+# Local secrets — never commit. Use .env.example as the template.
+.env
+
+# Uploaded images (user content, not source).
+assets/img/uploads/
