@@ -34,7 +34,7 @@ if (!is_admin()):
 <body>
   <div class="login-wrap">
     <div class="admin-brand">
-      <img src="../assets/img/logo.svg" alt="Battery Killer Gamez" onerror="this.style.display='none'">
+      <img src="../assets/img/logo.jpeg" alt="Battery Killer Gamez" onerror="this.style.display='none'">
       <span>ADMIN</span>
     </div>
     <form class="card" method="post" action="index.php">

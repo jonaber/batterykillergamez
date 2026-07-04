@@ -1,7 +1,7 @@
 <!-- FOOTER -->
 <footer>
   <a href="index.php" class="footer-logo">
-    <img src="assets/img/logo.svg" alt="Logo" onerror="this.style.display='none'">
+    <img src="assets/img/logo.jpeg" alt="Logo" onerror="this.style.display='none'">
     <span class="footer-logo-text">Battery Killer Gamez</span>
   </a>
 

@@ -23,7 +23,7 @@ try {
 <!-- NAV -->
 <nav>
   <a href="index.php" class="nav-logo">
-    <img src="assets/img/logo.svg" alt="Battery Killer Gamez Logo" onerror="this.style.display='none'">
+    <img src="assets/img/logo.jpeg" alt="Battery Killer Gamez Logo" onerror="this.style.display='none'">
   </a>
   <ul class="nav-links">
     <li><a href="index.php#games">Games</a></li>

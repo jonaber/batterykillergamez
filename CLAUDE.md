@@ -29,7 +29,7 @@ Consequences for making changes:
 - **Public pages** include `includes/header.php` (nav) and `includes/footer.php`; both pull editable content through `includes/content.php` (`get_slides`, `get_games`, `get_menu_pages`, `get_about`, `get_setting`/`set_setting`, etc.).
   - `index.php` — homepage (hero carousel, games grid, about, contact) rendered by looping over DB content.
   - `page.php?slug=...` — renders a standalone CMS page; 404s if the slug isn't a published page.
-  - `contact.php` — form handler using the **Post/Redirect/Get** pattern: validates, stores in `contact_messages`, stashes errors/old input in `$_SESSION`, and redirects back to `index.php#contact`.
+  - `contact.php` — form handler using the **Post/Redirect/Get** pattern: validates, stores in `contact_messages`, stashes errors/old input in `$_SESSION`, and redirects back to `index.php#contact`. After storing, it emails the owner via `includes/mailer.php` (`send_contact_email()`), which uses **PHPMailer over SMTP**. PHPMailer is vendored in `lib/PHPMailer/` and required directly (no Composer); all transport settings come from the `MAIL_*` keys in `.env`. Mail failures are logged and swallowed — the message is already saved, so they never block the visitor. Sending is off until `MAIL_ENABLED=true`.
 - **`includes/functions.php`** is included everywhere: it starts the session and provides `e()` (HTML escaping), flash messages (`flash`/`take_flash`), CSRF helpers, `slugify()`, and `save_uploaded_image()` (writes to `assets/img/uploads/`).
 
 ### Authentication & admin

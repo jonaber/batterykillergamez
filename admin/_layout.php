@@ -42,7 +42,7 @@ function admin_layout_start(string $active, string $title, bool $loadEditor = fa
 <div class="admin-shell">
   <aside class="admin-side">
     <div class="admin-brand">
-      <img src="../assets/img/logo.svg" alt="Battery Killer Gamez" onerror="this.style.display='none'">
+      <img src="../assets/img/logo.jpeg" alt="Battery Killer Gamez" onerror="this.style.display='none'">
       <span>ADMIN</span>
     </div>
     <nav>

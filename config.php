@@ -73,6 +73,19 @@ return [
         'password' => $cfg('ADMIN_PASSWORD', 'changeme'),
     ],
 
+    // SMTP settings for the contact form (PHPMailer). See includes/mailer.php.
+    'mail' => [
+        'enabled'      => filter_var($cfg('MAIL_ENABLED', 'false'), FILTER_VALIDATE_BOOLEAN),
+        'host'         => $cfg('MAIL_HOST', ''),
+        'port'         => $cfg('MAIL_PORT', '587'),
+        'username'     => $cfg('MAIL_USERNAME', ''),
+        'password'     => $cfg('MAIL_PASSWORD', ''),
+        'encryption'   => $cfg('MAIL_ENCRYPTION', 'tls'),  // tls | ssl | none
+        'from_address' => $cfg('MAIL_FROM_ADDRESS', ''),
+        'from_name'    => $cfg('MAIL_FROM_NAME', 'Battery Killer Gamez'),
+        'to_address'   => $cfg('MAIL_TO_ADDRESS', ''),      // where submissions are sent
+    ],
+
     // Used as the contact form's confirmation copy.
     'site_name' => $cfg('SITE_NAME', 'Battery Killer Gamez'),
 ];

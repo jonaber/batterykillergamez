@@ -108,7 +108,7 @@ include __DIR__ . '/includes/header.php';
 <section id="about">
   <div class="about-inner">
     <div class="about-logo-wrap reveal">
-      <img src="assets/img/logo.svg" alt="Battery Killer Gamez" onerror="this.style.display='none'">
+      <img src="assets/img/logo.jpeg" alt="Battery Killer Gamez" onerror="this.style.display='none'">
     </div>
     <div class="about-text">
       <div class="section-header reveal">
@@ -159,7 +159,7 @@ include __DIR__ . '/includes/header.php';
           </div>
           <div class="form-group reveal">
             <label for="subject">Subject</label>
-            <select id="subject" name="subject">
+            <select id="subject" name="subject" required>
               <option value="">Select a topic</option>
 <?php foreach ($data['subjects'] as $subject): ?>
               <option<?= (($old['subject'] ?? '') === $subject) ? ' selected' : '' ?>><?= e($subject) ?></option>
@@ -168,7 +168,7 @@ include __DIR__ . '/includes/header.php';
           </div>
           <div class="form-group reveal">
             <label for="game">Related Game</label>
-            <select id="game" name="game">
+            <select id="game" name="game" required>
               <option value="">Select a game</option>
 <?php foreach ($gameOptions as $opt): ?>
               <option<?= (($old['game'] ?? '') === $opt) ? ' selected' : '' ?>><?= e($opt) ?></option>

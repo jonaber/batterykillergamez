@@ -8,6 +8,8 @@
 
 require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/includes/content.php';
+require_once __DIR__ . '/includes/mailer.php';
 
 // Only accept POST.
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -17,7 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $data    = require __DIR__ . '/includes/data.php';
 $subjects = $data['subjects'];
-$games    = array_merge(array_map(fn($g) => $g['title'], $data['games']), ['General / All Games']);
+// Validate the game against the live DB list (what the form actually offers),
+// not the data.php seed — otherwise admin-edited games get wrongly rejected.
+$games    = array_merge(array_map(fn($g) => $g['title'], get_games()), ['General / All Games']);
 
 // Collect + trim input.
 $name    = trim($_POST['name']    ?? '');
@@ -41,11 +45,15 @@ if ($email === '') {
     $errors[] = 'Please enter a valid email address.';
 }
 
-if ($subject !== '' && !in_array($subject, $subjects, true)) {
+if ($subject === '') {
+    $errors[] = 'Please choose a subject.';
+} elseif (!in_array($subject, $subjects, true)) {
     $errors[] = 'Please choose a valid subject.';
 }
 
-if ($game !== '' && !in_array($game, $games, true)) {
+if ($game === '') {
+    $errors[] = 'Please choose a related game.';
+} elseif (!in_array($game, $games, true)) {
     $errors[] = 'Please choose a valid game.';
 }
 
@@ -84,6 +92,15 @@ try {
     error_log('Contact form DB error: ' . $ex->getMessage());
     header('Location: index.php#contact');
     exit;
+}
+
+// Notify the site owner by email. The message is already safely stored, so a
+// mail failure (or disabled/misconfigured SMTP) must not break the visitor's
+// flow — log it and still report success.
+try {
+    send_contact_email(compact('name', 'email', 'subject', 'game', 'message'));
+} catch (Throwable $ex) {
+    error_log('Contact form email error: ' . $ex->getMessage());
 }
 
 // Success.
